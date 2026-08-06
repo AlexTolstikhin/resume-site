@@ -7,6 +7,8 @@ const basePath = process.env.GITHUB_ACTIONS ? "/resume-site" : "";
 const nextConfig: NextConfig = {
   output: "export",
   basePath,
+  // Static export has no server to run the Image Optimization API.
+  images: { unoptimized: true },
 };
 
 export default nextConfig;
