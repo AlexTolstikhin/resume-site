@@ -1,25 +1,22 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
+
+// Palette sampled from the reference design.
+const navy = "#373D48";
+const navyDark = "#252932";
+const lineGray = "#D5D6D6";
 
 const profile = {
-  name: "Alex Tolstikhin",
+  first: "Alex",
+  last: "Tolstikhin",
   title: "Software Engineer",
   location: "Bay Area, CA",
   phone: "510.697.56.69",
   email: "alexeytolstikhin@gmail.com",
   linkedin: "https://linkedin.com/in/alexeytolstikhin",
-  // Lorem ipsum placeholder — swap for a real one-liner if you want a punchier hook.
-  tagline: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  linkedinLabel: "linkedin.com/in/alexeytolstikhin",
   bio: "I'm a software engineer based in the Bay Area with 13+ years building web products end to end — from QA and test automation to leading frontend architecture. Over the last several years I've focused on React, Next.js, and TypeScript, shipping features across insurance and fintech products at SoFi, with an emphasis on performance, testing, and reliability.",
 };
-
-const heroSkills = ["React", "Next.js", "TypeScript", "GraphQL"];
-
-const stats = [
-  { value: "13+", label: "Years of Experience" },
-  { value: "4", label: "Companies" },
-  { value: "80%", label: "Fewer Errors Shipped" },
-  { value: "1s", label: "Faster Page Loads" },
-];
 
 const skills = [
   {
@@ -71,7 +68,7 @@ const experience = [
   {
     company: "SoFi",
     role: "Senior Software Engineer",
-    dates: "September 2022 - PRESENT",
+    dates: "2022-09 - PRESENT",
     location: "San Francisco, CA",
     bullets: [
       "Led engineering efforts on multiple projects within the Auto and Life insurance domains, utilizing React/TypeScript, and focusing on seamless integration of new features and enhancements, resulting in increased user engagement and acquisition within respective funnels.",
@@ -85,7 +82,7 @@ const experience = [
   {
     company: "SoFi",
     role: "Software Engineer (Level 2)",
-    dates: "September 2021 - August 2022",
+    dates: "2021-09 - 2022-08",
     location: "San Francisco, CA",
     bullets: [
       "Engaged in various projects within the Lantern by SoFi team, a financial marketplace and product comparison platform owned by SoFi. Leveraged Next.js for development, contributing to multiple initiatives aimed at enhancing user experience and product functionality.",
@@ -97,7 +94,7 @@ const experience = [
   {
     company: "Ascendify",
     role: "Software Engineer (Level 1)",
-    dates: "December 2016 - August 2021",
+    dates: "2016-12 - 2021-08",
     location: "San Francisco, CA",
     bullets: [
       "Played an active role in multiple React-based initiatives within a startup environment, contributing to the development of a recruiting platform aimed at serving enterprise-level clients.",
@@ -108,7 +105,7 @@ const experience = [
   {
     company: "Ascendify",
     role: "Senior Software QA Engineer",
-    dates: "November 2015 - November 2016",
+    dates: "2015-11 - 2016-11",
     location: "San Francisco, CA",
     bullets: [
       "Took charge of the QA team across multiple projects, optimizing the QA process and elevating the deliverable quality of the application.",
@@ -119,7 +116,7 @@ const experience = [
   {
     company: "Good Technology by Blackberry",
     role: "Software QA Engineer",
-    dates: "February 2015 - November 2015",
+    dates: "2015-02 - 2015-11",
     location: "Sunnyvale, CA",
     bullets: [
       "Specialized in ensuring the reliability and quality of the MDM tool by designing and executing test plans, conducting regression testing, and documenting software defects.",
@@ -129,7 +126,7 @@ const experience = [
   {
     company: "ISD",
     role: "Junior Software QA Engineer",
-    dates: "January 2013 - December 2014",
+    dates: "2013-01 - 2014-12",
     location: "Dnipro, Ukraine",
     bullets: [
       "Contributed to developing a hospital-focused application for generating accurate medical reports, conducting meticulous testing and documentation to ensure system reliability. Collaboratively, we enhanced the application's quality and performance, meeting critical healthcare needs.",
@@ -152,22 +149,44 @@ const education = [
   },
 ];
 
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#education", label: "Education" },
-];
+const navLinks = [{ href: "#top", label: "Experience" }];
 
 export default function Home() {
   return (
-    <div className="min-h-full bg-zinc-950 text-zinc-100 selection:bg-violet-500/30">
+    <div id="top" className="min-h-full bg-white text-[#333]">
       <Nav />
-      <Hero />
-      <About />
-      <Skills />
-      <Experience />
-      <Education />
+      <ResumeHeader />
+      <main className="mx-auto max-w-4xl px-6 py-12 sm:px-10">
+        <p className="border-b pb-8 text-[15px] leading-relaxed text-[#666]" style={{ borderColor: lineGray }}>
+          {profile.bio}
+        </p>
+        <Timeline
+          id="experience"
+          icon={<BriefcaseIcon />}
+          heading="Experience"
+          entries={experience.map((job) => ({
+            key: `${job.company}-${job.role}`,
+            dates: job.dates,
+            title: job.company,
+            subtitle: job.role,
+            location: job.location,
+            bullets: job.bullets,
+          }))}
+        />
+        <Timeline
+          id="education"
+          icon={<CapIcon />}
+          heading="Education"
+          entries={education.map((edu) => ({
+            key: edu.school,
+            dates: edu.dates,
+            title: edu.school,
+            subtitle: edu.credential,
+            location: edu.location,
+          }))}
+        />
+        <SkillsSection />
+      </main>
       <Footer />
     </div>
   );
@@ -175,17 +194,18 @@ export default function Home() {
 
 function Nav() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-zinc-950/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#" className="text-sm font-semibold tracking-tight text-white">
-          Alex Tolstikhin
+    <header className="sticky top-0 z-50 border-b bg-white/95 backdrop-blur" style={{ borderColor: lineGray }}>
+      <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4 sm:px-10">
+        <a href="#top" className="text-sm font-semibold tracking-tight" style={{ color: navy }}>
+          {profile.first} {profile.last}
         </a>
-        <nav className="hidden gap-8 text-sm text-zinc-400 sm:flex">
+        <nav className="flex gap-8 text-sm font-medium">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="transition-colors hover:text-white"
+              className="border-b-2 pb-0.5"
+              style={{ color: navy, borderColor: navy }}
             >
               {link.label}
             </a>
@@ -193,7 +213,8 @@ function Nav() {
         </nav>
         <a
           href={`mailto:${profile.email}`}
-          className="rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-violet-500/20 transition-transform hover:scale-105"
+          className="rounded px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          style={{ backgroundColor: navy }}
         >
           Get in Touch
         </a>
@@ -202,296 +223,207 @@ function Nav() {
   );
 }
 
-function Hero() {
+function ResumeHeader() {
   return (
-    <section className="relative overflow-hidden px-6 pt-16 pb-24 sm:pt-24 sm:pb-32">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[36rem] bg-[radial-gradient(60%_50%_at_50%_0%,rgba(124,58,237,0.25),rgba(9,9,11,0)_70%)]"
-      />
-      <div className="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-2">
-        <div>
-          <p className="text-lg text-zinc-300">
-            👋 Hi, I&apos;m{" "}
-            <span className="font-semibold text-white">{profile.name}</span>
-          </p>
-          <h1 className="mt-2 text-5xl font-bold tracking-tight text-white sm:text-6xl">
-            {profile.title}
-          </h1>
-          <div className="mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-indigo-400 to-violet-400" />
-          <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-400">
-            {profile.tagline}
-          </p>
-
-          <dl className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-400">
-            <div className="flex items-center gap-1.5">
-              <dt className="sr-only">Location</dt>
-              <dd>{profile.location}</dd>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <dt className="sr-only">Phone</dt>
-              <dd>{profile.phone}</dd>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <dt className="sr-only">Email</dt>
-              <dd>
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="underline decoration-zinc-600 underline-offset-4 hover:text-white"
-                >
-                  {profile.email}
-                </a>
-              </dd>
-            </div>
-          </dl>
-
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href={`mailto:${profile.email}`}
-              className="rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-violet-500/20 transition-transform hover:scale-105"
-            >
-              Email Me
-            </a>
-            <a
-              href="#experience"
-              className="rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/5"
-            >
-              View Experience
-            </a>
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="flex items-center justify-center rounded-full border border-white/15 p-3 text-white transition-colors hover:bg-white/5"
-            >
-              <LinkedInIcon className="h-4 w-4" />
-            </a>
+    <section className="px-6 py-12 sm:px-10 sm:py-16" style={{ backgroundColor: navy }}>
+      <div className="mx-auto max-w-4xl">
+        <div className="flex flex-col-reverse items-start gap-8 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-4xl font-light text-white sm:text-5xl">
+              {profile.first} <span className="font-bold">{profile.last}</span>
+            </h1>
+            <p className="mt-3 text-xl text-gray-300">{profile.title}</p>
           </div>
-        </div>
-
-        <div className="relative mx-auto w-full max-w-sm">
-          <div
-            aria-hidden
-            className="absolute inset-6 -z-10 rounded-full bg-gradient-to-br from-indigo-500/40 to-violet-500/30 blur-2xl"
-          />
-          <div className="relative aspect-square overflow-hidden rounded-[2.5rem] border border-white/10 bg-zinc-900 shadow-2xl">
+          <div className="h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white/20 sm:h-28 sm:w-28">
             <Image
               src="/headshot.png"
-              alt="Portrait of Alex Tolstikhin"
-              fill
+              alt={`Portrait of ${profile.first} ${profile.last}`}
+              width={112}
+              height={112}
               priority
-              sizes="(min-width: 1024px) 384px, 80vw"
-              className="object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
-
-          {heroSkills.map((skill, i) => (
-            <span
-              key={skill}
-              className={[
-                "absolute rounded-xl border border-white/10 bg-zinc-900/90 px-3 py-1.5 text-xs font-medium text-zinc-200 shadow-lg backdrop-blur",
-                heroChipPosition[i],
-              ].join(" ")}
-            >
-              {skill}
-            </span>
-          ))}
         </div>
-      </div>
-    </section>
-  );
-}
 
-const heroChipPosition = [
-  "-top-2 -left-4 -rotate-6",
-  "top-10 -right-6 rotate-3",
-  "bottom-16 -left-8 rotate-3",
-  "-bottom-3 -right-2 -rotate-3",
-];
-
-function About() {
-  return (
-    <section id="about" className="scroll-mt-20 px-6 py-20">
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading eyebrow="About" title="About Me" />
-        <div className="mt-10 grid gap-12 lg:grid-cols-5">
-          <p className="text-base leading-relaxed text-zinc-400 lg:col-span-3">
-            {profile.bio}
-          </p>
-          <div className="grid grid-cols-2 gap-4 lg:col-span-2">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-2xl border border-white/10 bg-zinc-900/60 p-5"
-              >
-                <p className="text-3xl font-bold text-white">{stat.value}</p>
-                <p className="mt-1 text-sm text-zinc-400">{stat.label}</p>
-              </div>
-            ))}
+        <dl className="mt-10 grid grid-cols-1 gap-x-12 gap-y-3 text-sm sm:grid-cols-2">
+          <div className="flex gap-2">
+            <dt className="font-bold text-white">Phone</dt>
+            <dd className="text-gray-300">{profile.phone}</dd>
           </div>
-        </div>
+          <div className="flex gap-2">
+            <dt className="font-bold text-white">Location</dt>
+            <dd className="text-gray-300">{profile.location}</dd>
+          </div>
+          <div className="flex gap-2">
+            <dt className="font-bold text-white">E-mail</dt>
+            <dd>
+              <a href={`mailto:${profile.email}`} className="text-gray-300 hover:text-white">
+                {profile.email}
+              </a>
+            </dd>
+          </div>
+          <div className="flex gap-2">
+            <dt className="font-bold text-white">LinkedIn</dt>
+            <dd>
+              <a
+                href={profile.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-white"
+              >
+                {profile.linkedinLabel}
+              </a>
+            </dd>
+          </div>
+        </dl>
       </div>
     </section>
   );
 }
 
-function Skills() {
-  return (
-    <section id="skills" className="scroll-mt-20 border-t border-white/5 px-6 py-20">
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading eyebrow="Skills" title="What I Work With" />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {skills.map((group) => (
-            <div
-              key={group.category}
-              className="rounded-2xl border border-white/10 bg-zinc-900/60 p-6"
-            >
-              <h3 className="text-sm font-semibold text-white">
-                {group.category}
-              </h3>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full bg-white/5 px-2.5 py-1 text-xs text-zinc-300"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+type TimelineEntry = {
+  key: string;
+  dates: string;
+  title: string;
+  subtitle: string;
+  location?: string;
+  bullets?: string[];
+};
 
-function Experience() {
+function Timeline({
+  id,
+  icon,
+  heading,
+  entries,
+}: {
+  id: string;
+  icon: ReactNode;
+  heading: string;
+  entries: TimelineEntry[];
+}) {
   return (
-    <section
-      id="experience"
-      className="scroll-mt-20 border-t border-white/5 px-6 py-20"
-    >
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading eyebrow="Experience" title="Where I've Worked" />
-        <div className="mt-10 space-y-10 border-l border-white/10 pl-8">
-          {experience.map((job, i) => (
-            <div key={`${job.company}-${job.role}-${i}`} className="relative">
-              <span className="absolute top-1.5 -left-[calc(2rem+5px)] h-2.5 w-2.5 rounded-full bg-violet-400 ring-4 ring-zinc-950" />
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-base font-semibold text-white">
-                  {job.company}{" "}
-                  <span className="font-normal text-zinc-400">
-                    / {job.role}
-                  </span>
-                </h3>
-                <span className="text-xs text-zinc-500">{job.dates}</span>
-              </div>
-              <p className="text-xs text-zinc-500">{job.location}</p>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
-                {job.bullets.map((bullet, j) => (
-                  <li key={j}>{bullet}</li>
+    <section id={id} className="scroll-mt-20 pt-12">
+      <SectionHeading icon={icon} heading={heading} />
+      <div className="mt-8 space-y-8 border-l-2 pl-8" style={{ borderColor: lineGray }}>
+        {entries.map((entry) => (
+          <div key={entry.key} className="relative">
+            <span
+              className="absolute top-1.5 -left-[calc(2rem+5px)] h-2.5 w-2.5 rotate-45"
+              style={{ backgroundColor: navyDark }}
+            />
+            <p className="text-xs font-bold tracking-wide" style={{ color: navy }}>
+              {entry.dates}
+            </p>
+            <h3 className="mt-1 text-base font-bold" style={{ color: navy }}>
+              {entry.title}
+            </h3>
+            <p className="text-sm italic text-[#666]">{entry.subtitle}</p>
+            {entry.location && (
+              <p className="text-xs text-[#999]">{entry.location}</p>
+            )}
+            {entry.bullets && (
+              <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-[#666]">
+                {entry.bullets.map((bullet, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span aria-hidden>&bull;</span>
+                    <span>{bullet}</span>
+                  </li>
                 ))}
               </ul>
-            </div>
-          ))}
-        </div>
+            )}
+          </div>
+        ))}
       </div>
     </section>
   );
 }
 
-function Education() {
+function SkillsSection() {
   return (
-    <section
-      id="education"
-      className="scroll-mt-20 border-t border-white/5 px-6 py-20"
-    >
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading eyebrow="Education" title="Academic Background" />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
-          {education.map((edu) => (
-            <div
-              key={edu.school}
-              className="rounded-2xl border border-white/10 bg-zinc-900/60 p-6"
-            >
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-sm font-semibold text-white">
-                  {edu.school}
-                </h3>
-                <span className="text-xs text-zinc-500">{edu.dates}</span>
-              </div>
-              <p className="mt-1 text-sm text-zinc-400">{edu.credential}</p>
-              <p className="mt-1 text-xs text-zinc-500">{edu.location}</p>
+    <section id="skills" className="scroll-mt-20 pt-12">
+      <SectionHeading icon={<ToolboxIcon />} heading="Skills" />
+      <div className="mt-8 space-y-6 border-l-2 pl-8" style={{ borderColor: lineGray }}>
+        {skills.map((group) => (
+          <div key={group.category} className="relative">
+            <span
+              className="absolute top-1.5 -left-[calc(2rem+5px)] h-2.5 w-2.5 rotate-45"
+              style={{ backgroundColor: navyDark }}
+            />
+            <h3 className="text-sm font-bold" style={{ color: navy }}>
+              {group.category}
+            </h3>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <span
+                  key={item}
+                  className="rounded bg-[#F2F2F3] px-2.5 py-1 text-xs text-[#555]"
+                >
+                  {item}
+                </span>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
+  );
+}
+
+function SectionHeading({ icon, heading }: { icon: ReactNode; heading: string }) {
+  return (
+    <div className="flex items-center gap-4">
+      <div
+        className="flex h-10 w-10 rotate-45 shrink-0 items-center justify-center rounded-lg"
+        style={{ backgroundColor: navyDark }}
+      >
+        <div className="-rotate-45 text-white">{icon}</div>
+      </div>
+      <h2
+        className="text-xl font-bold tracking-wide uppercase"
+        style={{ color: navy }}
+      >
+        {heading}
+      </h2>
+    </div>
   );
 }
 
 function Footer() {
   return (
-    <footer
-      id="contact"
-      className="scroll-mt-20 border-t border-white/5 px-6 py-20 text-center"
-    >
-      <div className="mx-auto max-w-2xl">
-        <h2 className="text-3xl font-bold text-white">Let&apos;s work together</h2>
-        <p className="mt-3 text-zinc-400">
-          {profile.location} &middot; {profile.phone}
-        </p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href={`mailto:${profile.email}`}
-            className="inline-block rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-violet-500/20 transition-transform hover:scale-105"
-          >
-            {profile.email}
-          </a>
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="flex items-center justify-center rounded-full border border-white/15 p-3 text-white transition-colors hover:bg-white/5"
-          >
-            <LinkedInIcon className="h-4 w-4" />
-          </a>
-        </div>
-        <p className="mt-12 text-xs text-zinc-600">
-          &copy; {new Date().getFullYear()} {profile.name}
-        </p>
-      </div>
+    <footer className="border-t px-6 py-8 text-center text-xs text-[#999] sm:px-10" style={{ borderColor: lineGray }}>
+      &copy; {new Date().getFullYear()} {profile.first} {profile.last}
     </footer>
   );
 }
 
-function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
+function BriefcaseIcon() {
   return (
-    <div>
-      <p className="text-xs font-semibold uppercase tracking-widest text-violet-400">
-        {eyebrow}
-      </p>
-      <h2 className="mt-2 text-3xl font-bold tracking-tight text-white">
-        {title}
-      </h2>
-      <div className="mt-3 h-1 w-12 rounded-full bg-gradient-to-r from-indigo-400 to-violet-400" />
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-5 w-5" aria-hidden="true">
+      <rect x="3" y="7" width="18" height="13" rx="2" />
+      <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+      <path d="M3 12h18" />
+    </svg>
   );
 }
 
-function LinkedInIcon({ className }: { className?: string }) {
+function CapIcon() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.11 20.45H3.56V9h3.55v11.45Z" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-5 w-5" aria-hidden="true">
+      <path d="M2 9.5 12 5l10 4.5-10 4.5-10-4.5Z" />
+      <path d="M6 11.5V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.5" />
+      <path d="M21 9.5V15" />
+    </svg>
+  );
+}
+
+function ToolboxIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-5 w-5" aria-hidden="true">
+      <rect x="2.5" y="8" width="19" height="11" rx="2" />
+      <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+      <path d="M2.5 13h19" />
+      <path d="M10.5 13v2.5h3V13" />
     </svg>
   );
 }
