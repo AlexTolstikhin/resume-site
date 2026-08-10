@@ -1,5 +1,8 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+// Imported rather than referenced from public/ so the URL picks up basePath
+// (a string src would be emitted verbatim under images.unoptimized).
+import headshot from "./headshot.png";
 
 // Palette sampled from the reference design.
 const navy = "#373D48";
@@ -236,10 +239,8 @@ function ResumeHeader() {
           </div>
           <div className="h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white/20 sm:h-28 sm:w-28">
             <Image
-              src="/headshot.png"
+              src={headshot}
               alt={`Portrait of ${profile.first} ${profile.last}`}
-              width={112}
-              height={112}
               priority
               className="h-full w-full object-cover"
             />
