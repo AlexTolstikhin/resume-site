@@ -1,7 +1,7 @@
 import Image from "next/image";
 // Imported rather than referenced from public/ so the URL picks up basePath
 // (a string src would be emitted verbatim under images.unoptimized).
-import headshot from "@/app/headshot.png";
+import headshot from "@/app/assets/headshot.png";
 import { profile } from "@/app/constants/resume";
 
 export function ResumeHeader() {
