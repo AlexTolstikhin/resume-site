@@ -12,6 +12,19 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Palette sampled from the reference design, exposed as utilities
+   (bg-navy, text-muted, border-line, ...). */
+@theme {
+  --color-navy: #373d48;
+  --color-navy-dark: #252932;
+  --color-line: #d5d6d6;
+  --color-ink: #333333;
+  --color-muted: #666666;
+  --color-subtle: #999999;
+  --color-tag: #f2f2f3;
+  --color-tag-ink: #555555;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
