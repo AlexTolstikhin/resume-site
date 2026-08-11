@@ -28,7 +28,14 @@ export function ResumeHeader() {
         <dl className="mt-10 grid grid-cols-1 gap-x-12 gap-y-3 text-sm sm:grid-cols-2">
           <div className="flex gap-2">
             <dt className="font-bold text-white">Phone</dt>
-            <dd className="text-gray-300">{profile.phone}</dd>
+            <dd>
+              <a
+                href={profile.phoneHref}
+                className="text-gray-300 hover:text-white"
+              >
+                {profile.phone}
+              </a>
+            </dd>
           </div>
           <div className="flex gap-2">
             <dt className="font-bold text-white">Location</dt>
@@ -51,10 +58,23 @@ export function ResumeHeader() {
               <a
                 href={profile.linkedin}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="me noopener noreferrer"
                 className="text-gray-300 hover:text-white"
               >
                 {profile.linkedinLabel}
+              </a>
+            </dd>
+          </div>
+          <div className="flex gap-2">
+            <dt className="font-bold text-white">GitHub</dt>
+            <dd>
+              <a
+                href={profile.github}
+                target="_blank"
+                rel="me noopener noreferrer"
+                className="text-gray-300 hover:text-white"
+              >
+                {profile.githubLabel}
               </a>
             </dd>
           </div>

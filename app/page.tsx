@@ -14,9 +14,10 @@ export default function Home() {
       <Nav />
       <ResumeHeader />
       <main className="mx-auto max-w-4xl px-6 py-12 sm:px-10">
-        <p className="border-b border-line pb-8 text-[15px] leading-relaxed text-muted">
-          {profile.bio}
-        </p>
+        <section id="summary" className="scroll-mt-20 border-b border-line pb-8">
+          <h2 className="sr-only">Summary</h2>
+          <p className="text-[15px] leading-relaxed text-muted">{profile.bio}</p>
+        </section>
         <Timeline
           id="experience"
           icon={<Briefcase className="h-5 w-5" />}
@@ -24,8 +25,8 @@ export default function Home() {
           entries={experience.map((job) => ({
             key: `${job.company}-${job.role}`,
             dates: job.dates,
-            title: job.company,
-            subtitle: job.role,
+            title: job.role,
+            subtitle: job.company,
             location: job.location,
             bullets: job.bullets,
           }))}

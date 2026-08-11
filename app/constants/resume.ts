@@ -13,13 +13,16 @@ import type {
 export const profile: Profile = {
   first: "Alex",
   last: "Tolstikhin",
-  title: "Software Engineer",
-  location: "Bay Area, CA",
-  phone: "510.697.56.69",
+  title: "Senior Software Engineer",
+  location: "San Francisco Bay Area, CA",
+  phone: "510.697.5669",
+  phoneHref: "tel:+15106975669",
   email: "alexeytolstikhin@gmail.com",
   linkedin: "https://linkedin.com/in/alexeytolstikhin",
   linkedinLabel: "linkedin.com/in/alexeytolstikhin",
-  bio: "I'm a software engineer based in the Bay Area with 13+ years building web products end to end — from QA and test automation to leading frontend architecture. Over the last several years I've focused on React, Next.js, and TypeScript, shipping features across insurance and fintech products at SoFi, with an emphasis on performance, testing, and reliability.",
+  github: "https://github.com/AlexTolstikhin",
+  githubLabel: "github.com/AlexTolstikhin",
+  bio: "Senior Software Engineer in the Bay Area, building insurance and fintech products at SoFi with React, Next.js, and TypeScript. Nine years as an engineer, preceded by four in QA and test automation — which is why I tend to own the SLOs, error monitoring, and end-to-end release gates around what I ship, not just the features.",
 };
 
 export const skills: SkillGroup[] = [
@@ -40,31 +43,34 @@ export const skills: SkillGroup[] = [
       "Less",
       "Styled Components",
       "Performance Optimization",
-      "Jest",
-      "React Testing Library",
-      "Cypress",
-      "Playwright",
     ],
   },
   {
     category: "Backend Development",
-    items: ["Kotlin", "Scala", "PHP"],
+    items: ["Kotlin", "Groovy", "PHP"],
   },
   {
-    category: "Version Control & Collaboration",
-    items: ["Git", "GitHub", "GitLab", "Bitbucket", "Jenkins", "GitHub Actions"],
-  },
-  {
-    category: "Design & Frameworks",
+    category: "Build & Tooling",
     items: ["Webpack", "Bootstrap", "MUI (Material-UI)"],
+  },
+  {
+    category: "Testing & Quality",
+    items: [
+      "Jest",
+      "React Testing Library",
+      "Cypress",
+      "Playwright",
+      "JMeter",
+      "SLOs & Error Budgets",
+    ],
+  },
+  {
+    category: "Version Control & CI/CD",
+    items: ["Git", "GitHub", "GitLab", "Bitbucket", "Jenkins", "GitHub Actions"],
   },
   {
     category: "Analytics & Monitoring",
     items: ["Optimizely", "Amplitude", "DataDog", "Kibana", "Rollbar"],
-  },
-  {
-    category: "Soft Skills",
-    items: ["Communication", "Collaboration", "UI/UX Design Principles"],
   },
 ];
 
@@ -77,7 +83,7 @@ export const experience: Job[] = [
     bullets: [
       "Led engineering efforts on multiple projects within the Auto and Life insurance domains, utilizing React/TypeScript, and focusing on seamless integration of new features and enhancements, resulting in increased user engagement and acquisition within respective funnels.",
       "Initiated and spearheaded the migration of the app to server-side API fetching, resulting in significant performance enhancements throughout the platform, with up to 1-second improvements in loading times on pages with heavy API usage.",
-      "Implemented end-to-end Cypress tests, preventing all occurrences of accidental issue deployment to production caused by changes from other teams in external repositories.",
+      "Built and owned the Cypress end-to-end suite gating frontend releases, catching breaking changes that originated in other teams' external repositories before they reached production.",
       "Collaborated on multiple cross-functional projects by integrating entry points in React, Next.js, Kotlin, Groovy, and Flutter repositories, contributing to an increase in leads for the insurance product.",
       "Implemented weekly Rollbar issue reviews, reducing errors by 80% through prioritized resolution during on-call weeks and efficient handling of high-priority issues.",
       "Led team effort to implement DataDog SLOs, resulting in an improvement of key feature SLOs from 99.5% to 99.9%, ensuring consistent product quality. Also served as the representative for SLO reporting and weekly updates in cross-team meetings.",
@@ -85,7 +91,7 @@ export const experience: Job[] = [
   },
   {
     company: "SoFi",
-    role: "Software Engineer (Level 2)",
+    role: "Software Engineer",
     dates: "September 2021 — August 2022",
     location: "San Francisco, CA",
     bullets: [
@@ -97,7 +103,7 @@ export const experience: Job[] = [
   },
   {
     company: "Ascendify",
-    role: "Software Engineer (Level 1)",
+    role: "Software Engineer (promoted from Senior QA Engineer)",
     dates: "December 2016 — August 2021",
     location: "San Francisco, CA",
     bullets: [
@@ -133,7 +139,7 @@ export const experience: Job[] = [
     dates: "January 2013 — December 2014",
     location: "Dnipro, Ukraine",
     bullets: [
-      "Contributed to developing a hospital-focused application for generating accurate medical reports, conducting meticulous testing and documentation to ensure system reliability. Collaboratively, we enhanced the application's quality and performance, meeting critical healthcare needs.",
+      "Tested a hospital reporting application in a regulated healthcare environment, owning test cases and defect documentation.",
     ],
   },
 ];
@@ -153,4 +159,6 @@ export const education: School[] = [
   },
 ];
 
-export const navLinks: NavLink[] = [{ href: "#top", label: "Experience" }];
+export const navLinks: NavLink[] = [
+  { href: "#experience", label: "Experience" },
+];

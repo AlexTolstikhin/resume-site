@@ -30,8 +30,10 @@ export function Timeline({
           <div key={entry.key} className="relative">
             <span className="absolute top-0.5 -left-[calc(2rem+7.8px)] h-3.5 w-3.5 rotate-45 bg-navy-dark" />
             <p className="text-sm font-medium text-muted">{entry.dates}</p>
+            {/* The role is the <h3>: it is the field recruiters and parsers
+                weight most, so it carries the heading, not the employer. */}
             <h3 className="mt-1 text-base font-bold text-navy">{entry.title}</h3>
-            <p className="text-sm text-muted italic">{entry.subtitle}</p>
+            <p className="text-sm font-semibold text-navy">{entry.subtitle}</p>
             {entry.location && (
               <p className="text-xs text-subtle">{entry.location}</p>
             )}
