@@ -22,7 +22,7 @@ export const profile: Profile = {
   linkedinLabel: "linkedin.com/in/alexeytolstikhin",
   github: "https://github.com/AlexTolstikhin",
   githubLabel: "github.com/AlexTolstikhin",
-  bio: "Senior Software Engineer in the Bay Area, building insurance and fintech products at SoFi with React, Next.js, and TypeScript. Nine years as an engineer, preceded by four in QA and test automation — which is why I tend to own the SLOs, error monitoring, and end-to-end release gates around what I ship, not just the features.",
+  bio: "Senior Software Engineer in the Bay Area, building lending and insurance products at SoFi across React, Next.js, TypeScript, and Kotlin services. Nine years as an engineer, preceded by four in QA and test automation — which is why I tend to own the SLOs, event instrumentation, compliance reviews, and end-to-end release gates around what I ship, not just the features.",
 };
 
 export const skills: SkillGroup[] = [
@@ -42,16 +42,43 @@ export const skills: SkillGroup[] = [
       "Sass",
       "Less",
       "Styled Components",
+      "StyleX",
+      "Design Systems",
+      "Accessibility",
       "Performance Optimization",
     ],
   },
   {
     category: "Backend Development",
-    items: ["Kotlin", "Groovy", "PHP"],
+    items: [
+      "Kotlin",
+      "Groovy",
+      "PHP",
+      "REST APIs",
+      "SQL & DB Migrations",
+      "Kafka",
+    ],
+  },
+  {
+    category: "Fintech & Domain",
+    items: [
+      "Lending Originations",
+      "Plaid",
+      "DocuSign",
+      "Consent & Compliance Flows",
+      "PII Masking",
+      "CVE Remediation",
+    ],
   },
   {
     category: "Build & Tooling",
-    items: ["Webpack", "Bootstrap", "MUI (Material-UI)"],
+    items: [
+      "Webpack",
+      "Bootstrap",
+      "MUI (Material-UI)",
+      "Contentful",
+      "Istio / Service Mesh",
+    ],
   },
   {
     category: "Testing & Quality",
@@ -70,7 +97,14 @@ export const skills: SkillGroup[] = [
   },
   {
     category: "Analytics & Monitoring",
-    items: ["Optimizely", "Amplitude", "DataDog", "Kibana", "Rollbar"],
+    items: [
+      "Optimizely",
+      "Amplitude",
+      "DataDog (RUM & Monitors)",
+      "Segment / CDP",
+      "Kibana",
+      "Rollbar",
+    ],
   },
 ];
 
@@ -81,12 +115,17 @@ export const experience: Job[] = [
     dates: "September 2022 — Present",
     location: "San Francisco, CA",
     bullets: [
-      "Led engineering efforts on multiple projects within the Auto and Life insurance domains, utilizing React/TypeScript, and focusing on seamless integration of new features and enhancements, resulting in increased user engagement and acquisition within respective funnels.",
+      "Tech lead and reviewer for a headless CMS integration into the SMB lending funnel, owning access provisioning and the security review of token handling.",
+      "Built the SMB lending funnel across React and Kotlin services — business-classification search, a standardized error-message utility that removed per-step boilerplate, attribution tracking from application start, and create-application API changes.",
+      "Owned the Plaid asset-report failure recovery path end to end, pairing frontend routing to manual document upload with a backend SMS re-engagement trigger, turning a dead-end verification failure into a recoverable flow.",
+      "Instrumented the lending funnel end to end — application start, offer received, offer selected, and loan funded — across backend event schemas and the customer data platform, then catalogued every event name as the team's source of truth for analytics.",
+      "Challenged a mobile-web design direction that duplicated native app patterns and proposed a responsive approach instead; UX adopted it, removing a parallel implementation for the web team. Drove a shared component out of three engineers' near-duplicate pages, cutting maintenance overhead.",
+      "Drove the compliance review process for a consumer acceptance program, remediated dependency CVEs across three repositories, and added PII masking to session replay.",
+      "Mentor engineers across web and mobile — onboarded a new hire to CI/CD and on-call tooling on day one, review merge requests for the frontend team, and pair on server-side rendering and environment debugging. Conduct frontend technical interviews and author structured hiring recommendations.",
+      "Led frontend delivery for the Auto and Life insurance funnels in React/TypeScript, integrating entry points across React, Next.js, Kotlin, Groovy, and Flutter codebases to grow insurance leads.",
       "Initiated and spearheaded the migration of the app to server-side API fetching, resulting in significant performance enhancements throughout the platform, with up to 1-second improvements in loading times on pages with heavy API usage.",
       "Built and owned the Cypress end-to-end suite gating frontend releases, catching breaking changes that originated in other teams' external repositories before they reached production.",
-      "Collaborated on multiple cross-functional projects by integrating entry points in React, Next.js, Kotlin, Groovy, and Flutter repositories, contributing to an increase in leads for the insurance product.",
-      "Implemented weekly Rollbar issue reviews, reducing errors by 80% through prioritized resolution during on-call weeks and efficient handling of high-priority issues.",
-      "Led team effort to implement DataDog SLOs, resulting in an improvement of key feature SLOs from 99.5% to 99.9%, ensuring consistent product quality. Also served as the representative for SLO reporting and weekly updates in cross-team meetings.",
+      "Owned production reliability for the insurance funnels: instituted weekly Rollbar triage reviews that reduced errors by 80%, and led DataDog SLO adoption that moved key feature SLOs from 99.5% to 99.9%, representing SLO reporting in weekly cross-team reviews.",
     ],
   },
   {
