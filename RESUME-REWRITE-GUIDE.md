@@ -228,6 +228,99 @@ No line on your resume names this. The QA history is currently presented as
 *biography* — where you came from — when it should read as *thesis*: why the
 frontend work you ship doesn't break. Same facts, opposite outcome.
 
+---
+
+# Addendum — material from the Q3/2026 hype doc
+
+Source: internal quarterly self-review covering **Apr 2025 – Aug 2026**, team
+**Lantern × SMB**, level **Senior**.
+
+**This closes almost every gap the review identified.** It also shows the resume
+is describing the wrong job: the page says Auto/Life insurance, while the last
+~18 months have been Lantern marketplace and SMB lending — broader, more
+full-stack, and more senior than anything currently written down.
+
+### Sanitize before using any of this
+
+- **Strip all ticket IDs** — `LTN-####`, `SMB-####`, `CC-#####`, `TGSD-#####`.
+  Meaningless externally; leaks internal tracker structure.
+- **Strip internal repo/service names** — `lantern-consumer-db`, `smb-ui`,
+  `smb-platform`, `una-web-components`, `banking-accounts-ui`, `money-ui`,
+  `lending-portal`. Describe the system instead.
+- **Never include colleague names.** Five engineers appear by name in the doc
+  (one with a surname). Write "a new hire", "three engineers", "teammates".
+- The interview-assessment screenshot contains a **named candidate and a
+  do-not-hire recommendation**. Use only the fact that you interview.
+
+### Gaps now closable
+
+| Gap | Evidence |
+|---|---|
+| Mentorship (absent) | 10+ instances: onboarding a new hire to CI/CD + on-call tooling, MR reviews, unblocking engineers across mobile/web, pairing on SSR debugging |
+| Tradeoffs (0 of 19 bullets) | Figma challenge → responsive over native-mimicking; expand/contract MR split for safe rollback |
+| Tech lead | "Acted as tech lead and reviewer for the Contentful CMS integration" |
+| Backend / full-stack | DB migrations, BE event schemas, create-application API, payment-capability extension, Istio sidecar egress |
+| Compliance / domain | Consumer Acceptance Program review process, consent versioning, PII masking, CMS token-handling security review |
+| Security | Lodash CVE across three repos; dnsjava CVE |
+| GraphQL (claimed, unevidenced) | GraphQL operationName forwarding for API observability |
+| Interviewing | Authors structured frontend interview assessments and hire recommendations |
+| Fintech keywords | lending, originations, repayment cadence, Plaid, DocuSign, offers, funnel |
+
+### Draft bullets — SoFi, Senior Software Engineer
+
+Sanitized, no invented numbers. Pick 6–8; don't ship all of them.
+
+1. "Acted as tech lead and reviewer for a headless CMS integration into the SMB
+   lending funnel, owning access provisioning and the security review of token
+   handling."
+2. "Built the SMB lending funnel across frontend and backend — business
+   classification search, a standardized error-message utility that removed
+   per-step boilerplate, attribution tracking from application start, and
+   create-application API changes."
+3. "Owned the Plaid asset-report failure recovery path end to end — frontend
+   routing to manual document upload plus a backend SMS re-engagement trigger —
+   turning a dead-end verification failure into a recoverable flow."
+4. "Instrumented the lending funnel end to end (application start, offer
+   received, offer selected, loan funded) across backend event schemas and the
+   customer data platform, and catalogued every event name into the team's
+   source of truth for analytics."
+5. "Challenged a mobile-web design direction that duplicated native app patterns;
+   proposed a responsive approach instead, which the UX team adopted — removing
+   a parallel implementation for the web team." ← *your tradeoff bullet*
+6. "Spotted duplicated implementations across three engineers' pages and drove
+   creation of a shared reusable component that all three adopted, cutting
+   duplicate code and maintenance overhead."
+7. "Drove the compliance review process for a consumer acceptance program,
+   remediated CVEs across three repositories, and added PII masking to session
+   replay."
+8. "Mentored engineers across web and mobile — onboarded a new hire to CI/CD and
+   on-call tooling on day one, reviewed merge requests for the frontend team,
+   and paired on server-side rendering and environment debugging."
+9. "Extended backend payment capability to support a new repayment cadence in
+   loan originations, and gated new payment features for legacy mobile clients
+   below a minimum version to prevent crashes on older builds."
+10. "Configured service-mesh egress for cross-service communication in the
+    lending portal — infrastructure ownership beyond typical frontend scope."
+11. "Added proactive Datadog monitoring for a critical unmonitored endpoint and
+    GraphQL operation-name forwarding for precise real-user monitoring."
+12. "Conduct frontend technical interviews and author structured hiring
+    recommendations."
+
+### Skills to add (now evidenced)
+
+`GraphQL` (move out of unevidenced), `Plaid`, `Contentful`, `StyleX`,
+`Istio / service mesh`, `Kafka`, `Datadog RUM`, `CDP / Segment`,
+`Design systems`, `CI/CD`, `Web security (CVE remediation, PII masking)`,
+`SQL / DB migrations`.
+
+### Still open
+
+- Which **backend language** is the SMB/Lantern BE work in? That determines
+  whether `Kotlin` stays and whether you can claim full-stack outright.
+- The insurance work (2022–2024) and Lantern/SMB (2025–present) are different
+  domains inside one title. Decide whether to split the SoFi Senior entry into
+  two dated blocks or group bullets by domain.
+
 ## Still worth doing
 
 - **Ship a downloadable PDF.** `/resume.pdf` currently 404s, and most ATS flows
