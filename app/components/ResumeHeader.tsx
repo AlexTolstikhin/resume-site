@@ -3,11 +3,12 @@ import Image from "next/image";
 // (a string src would be emitted verbatim under images.unoptimized).
 import headshot from "@/app/assets/headshot.png";
 import { profile } from "@/app/constants/resume";
+import { Container } from "./Container";
 
 export function ResumeHeader() {
   return (
-    <section className="bg-navy px-6 py-12 sm:px-10 sm:py-16">
-      <div className="mx-auto max-w-4xl">
+    <section className="bg-navy">
+      <Container className="py-12 sm:py-16">
         <div className="flex flex-col-reverse items-start gap-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-4xl font-light text-white sm:text-5xl">
@@ -79,7 +80,7 @@ export function ResumeHeader() {
             </dd>
           </div>
         </dl>
-      </div>
+      </Container>
     </section>
   );
 }

@@ -1,3 +1,4 @@
+export { Container } from "./Container";
 export { Nav } from "./Nav";
 export { ResumeHeader } from "./ResumeHeader";
 export { SectionHeading } from "./SectionHeading";

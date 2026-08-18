@@ -32,7 +32,9 @@ export function Timeline({
             <p className="text-sm font-medium text-muted">{entry.dates}</p>
             {/* The role is the <h3>: it is the field recruiters and parsers
                 weight most, so it carries the heading, not the employer. */}
-            <h3 className="mt-1 text-base font-bold text-navy">{entry.title}</h3>
+            <h3 className="mt-1 text-base font-bold text-navy">
+              {entry.title}
+            </h3>
             <p className="text-sm font-semibold text-navy">{entry.subtitle}</p>
             {entry.location && (
               <p className="text-xs text-subtle">{entry.location}</p>
